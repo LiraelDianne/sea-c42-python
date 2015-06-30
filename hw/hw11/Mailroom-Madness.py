@@ -16,15 +16,15 @@ def thankyou():
     donor_name = choosename()
     if donor_name not in donorList:
         donorList.append(donor_name)
-        donations[donor_name] = 0
-    new_donation = donationAmount()
+        donations[donor_name] = [0]
+    new_donation = float(donationAmount())
     donations[donor_name].append(new_donation)
-    thankyouMessage = ("Dear " + donor_name + ", Thank you so much for your " +
-                       "kind donation of $" + new_donation + ".00. We here " +
-                       "at the Foundation for Homeless Whales greatly " +
-                       "appreciate it. Your money will go towards creating new"
-                       + " oceans on the moon for whales to live in. \n Thanks"
-                       + " again, \n Jim Grant \n Director E. H. W.")
+    thankyouMessage = ("Dear %s, \n Thank you so much for your " % donor_name +
+                       "kind donation of $%s0. We here at " % new_donation +
+                       "the Foundation for Homeless Whales greatly " +
+                       "appreciate it. Your money will go towards creating " +
+                       " new oceans on the moon for whales to live in. \n " +
+                       "Thanks again, \n Jim Grant \n Director E. H. W.")
     print(thankyouMessage)
     print(input("Press Enter to Continue..."))
     menu()
@@ -71,14 +71,22 @@ def report():
 
 
 def makeline(donor):
-    total = 0
+    total = 0.00
     name = donor
     number = len(donations[name])
     for num in range(len(donations[name])):
         total = total + donations[name][num]
-    avg = total/number
-    line = name + " \t| $" + str(total) + " \t| " + str(number) + " \t| $" + str(avg)
+    avg = format(total/number)
+    total = format(total)
+    line = "%s \t| $%s \t| %s \t| $%s" % (name, total, number, avg)
     return line
+
+
+def format(number):
+    num = round(number, 2)
+    if (num * 10) % 1 == 0:
+        num = str(num) + "0"
+    return num
 
 
 def menu():
