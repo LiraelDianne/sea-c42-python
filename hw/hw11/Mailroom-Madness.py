@@ -1,12 +1,33 @@
+import sys
+
+donorlist = ["Bill Gates", "Elon Musk", "Your Mom"]
+
 print("Welcome to Mailroom Madness")
 
 
 def thankyou():
-    # thank you
+    print("Please enter a name, or choose from the following:")
+    print("list - Print a list of previous donors")
+    print("quit - Return to main menu")
+    donor_name = choosename()
+    print(donor_name)
+    menu()
+
+
+def choosename():
+    choice = input()
+    if choice == 'list':
+        print(donorlist)
+        print("Please type a name from the list, or enter a new donor name.")
+        choice = choosename()
+    elif choice == 'quit':
+        menu()
+    return choice
 
 
 def report():
-    # report
+    print("report")
+    menu()
 
 
 def menu():
@@ -23,4 +44,6 @@ def menu():
     elif choice == 'quit':
         sys.exit()
     else:
-        print("Please select one of the options above.")
+        print("Please select one of the options.")
+        menu()
+menu()
