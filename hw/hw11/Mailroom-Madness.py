@@ -1,6 +1,7 @@
 import sys
 
-donorlist = ["Bill Gates", "Elon Musk", "Your Mom"]
+donorList = ["Bill Gates", "Elon Musk", "Your Mom"]
+donations = []
 
 print("Welcome to Mailroom Madness")
 
@@ -10,19 +11,33 @@ def thankyou():
     print("list - Print a list of previous donors")
     print("quit - Return to main menu")
     donor_name = choosename()
-    print(donor_name)
+    if donor_name not in donorList:
+        donorList.append(donor_name)
+        donations[donor_name] = 0
+    new_donation = donationAmount()
+    donations[donor_name].append(new_donation)
     menu()
 
 
 def choosename():
     choice = input()
-    if choice == 'list':
-        print(donorlist)
+    if choice == 'quit':
+        menu()
+    elif choice == 'list':
+        print(donorList)
         print("Please type a name from the list, or enter a new donor name.")
         choice = choosename()
-    elif choice == 'quit':
+        return choice
+    else:
+        return choice
+
+
+def donationAmount():
+    choice = input("Please enter a donation amount or 'quit':")
+    if choice == 'quit':
         menu()
-    return choice
+    else:
+        return choice
 
 
 def report():
