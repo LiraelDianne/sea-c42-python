@@ -9,7 +9,26 @@ donations = {"Bill Gates": [200, 600, 300], "Elon Musk": [500, 400],
 print("Welcome to Mailroom Madness")
 
 
+def menu():
+    print("Choose from the following:")
+    print("T - Send a (T)hank You")
+    print("R - Create a (R)eport")
+    print("quit - Quit the program")
+    choice = input()
+    choice = choice.lower()
+    if choice == "t":
+        thankyou()
+    elif choice == "r":
+        report()
+    elif choice == 'quit':
+        sys.exit()
+    else:
+        print("Please select one of the options.")
+        menu()
+
+
 def thankyou():
+    # Generate a thank you message
     print("Please enter a name, or choose from the following:")
     print("list - Print a list of previous donors")
     print("quit - Return to main menu")
@@ -31,6 +50,7 @@ def thankyou():
 
 
 def choosename():
+    # allow user to input a donor name or choose from the list
     choice = input()
     if choice == 'quit':
         menu()
@@ -44,6 +64,7 @@ def choosename():
 
 
 def donationAmount():
+    # input a donation amount and verify that it is a number
     choice = input("Please enter a donation amount or 'quit':")
     if choice == 'quit':
         menu()
@@ -64,6 +85,7 @@ def is_number(s):
 
 
 def report():
+    # generate a report of all donors
     print("Name \t\t| Total \t| # \t| Average")
     for donor in donorList:
         print(makeline(donor))
@@ -71,38 +93,24 @@ def report():
 
 
 def makeline(donor):
-    total = 0.00
+    # format a line for a single donor and related info
+    total = 0.0
     name = donor
     number = len(donations[name])
     for num in range(len(donations[name])):
         total = total + donations[name][num]
     avg = format(total/number)
     total = format(total)
-    line = "%s \t| $%s \t| %s \t| $%s" % (name, total, number, avg)
+    line = "%s \t| %s \t| %s \t| %s" % (name, total, number, avg)
     return line
 
 
 def format(number):
+    # format a dollar amount so it will appear as $nn.nn
     num = round(number, 2)
     if (num * 10) % 1 == 0:
         num = str(num) + "0"
+    num = "$" + str(num)
     return num
 
-
-def menu():
-    print("Choose from the following:")
-    print("T - Send a (T)hank You")
-    print("R - Create a (R)eport")
-    print("quit - Quit the program")
-    choice = input()
-    choice = choice.lower()
-    if choice == "t":
-        thankyou()
-    elif choice == "r":
-        report()
-    elif choice == 'quit':
-        sys.exit()
-    else:
-        print("Please select one of the options.")
-        menu()
 menu()
