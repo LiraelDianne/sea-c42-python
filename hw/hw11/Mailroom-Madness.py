@@ -64,8 +64,21 @@ def is_number(s):
 
 
 def report():
-    print("report")
+    print("Name \t\t| Total \t| # \t| Average")
+    for donor in donorList:
+        print(makeline(donor))
     menu()
+
+
+def makeline(donor):
+    total = 0
+    name = donor
+    number = len(donations[name])
+    for num in range(len(donations[name])):
+        total = total + donations[name][num]
+    avg = total/number
+    line = name + " \t| $" + str(total) + " \t| " + str(number) + " \t| $" + str(avg)
+    return line
 
 
 def menu():
