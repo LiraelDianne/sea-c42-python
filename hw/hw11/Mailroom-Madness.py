@@ -1,7 +1,10 @@
 import sys
 
-donorList = ["Bill Gates", "Elon Musk", "Your Mom"]
-donations = []
+donorList = ["Bill Gates", "Elon Musk", "Your Mom",
+             "Harry Potter", "Tony Stark"]
+donations = {"Bill Gates": [200, 600, 300], "Elon Musk": [500, 400],
+             "Your Mom": [5, 20], "Harry Potter": [38.24],
+             "Tony Stark": [500, 500, 500]}
 
 print("Welcome to Mailroom Madness")
 
@@ -16,6 +19,14 @@ def thankyou():
         donations[donor_name] = 0
     new_donation = donationAmount()
     donations[donor_name].append(new_donation)
+    thankyouMessage = ("Dear " + donor_name + ", Thank you so much for your " +
+                       "kind donation of $" + new_donation + ".00. We here " +
+                       "at the Foundation for Homeless Whales greatly " +
+                       "appreciate it. Your money will go towards creating new"
+                       + " oceans on the moon for whales to live in. \n Thanks"
+                       + " again, \n Jim Grant \n Director E. H. W.")
+    print(thankyouMessage)
+    print(input("Press Enter to Continue..."))
     menu()
 
 
@@ -36,8 +47,20 @@ def donationAmount():
     choice = input("Please enter a donation amount or 'quit':")
     if choice == 'quit':
         menu()
+    elif not is_number(choice):
+        print("Please make sure your donation amount is a number.")
+        choice = donationAmount()
+        return choice
     else:
         return choice
+
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 
 def report():
