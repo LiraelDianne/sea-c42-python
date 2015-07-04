@@ -103,6 +103,7 @@ def pollster_predictions(poll_rows):
                 d[pollster][state] = row_to_edge(recent)
     return d
 
+
 ################################################################################
 # Problem 4: Pollster errors
 ################################################################################
@@ -112,16 +113,26 @@ def average_error(state_edges_predicted, state_edges_actual):
     Given predicted *StateEdges* and actual *StateEdges*, returns
     the average error of the prediction.
     """
-    #TODO: Implement this function
-    pass
+    states = 0
+    total_error = 0
+    for state in state_edges_predicted:
+        states = states + 1
+        error = abs(state_edges_predicted[state] - state_edges_actual[state])
+        total_error = total_error + error
+    avg = total_error/states
+    return avg
+
 
 def pollster_errors(pollster_predictions, state_edges_actual):
     """
     Given *PollsterPredictions* and actual *StateEdges*,
     retuns *PollsterErrors*.
     """
-    #TODO: Implement this function
-    pass
+    d = {}
+    for pollster in pollster_predictions:
+        err = average_error(pollster_predictions[pollster], state_edges_actual)
+        d[pollster] = err
+    return d
 
 
 ################################################################################
