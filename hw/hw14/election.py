@@ -61,14 +61,16 @@ def most_recent_poll_row(poll_rows, pollster, state):
     """
     most_recent = {}
     for row in poll_rows:
-        if row['Pollster'] == pollster and row['State'] == state:
+        if row["Pollster"] == pollster and row["State"] == state:
             if most_recent == {}:
-                most_recent == row
-            elif earlier_date(most_recent['Date'], row['Date']):
-                most_recent == row
-        else:
-            most_recent = None
-    return most_recent
+                most_recent = row
+            elif earlier_date(most_recent["Date"], row["Date"]):
+                most_recent = row
+    if most_recent == {}:
+        return None
+    else:
+        return most_recent
+
 
 
 ################################################################################
@@ -80,16 +82,17 @@ def unique_column_values(rows, column_name):
     Given a list of rows and the name of a column (a string),
     returns a set containing all values in that column.
     """
-    #TODO: Implement this function
-    pass
+    d = {}
+    for row in rows:
+        d.extend(row["column_name"])
+    return d
 
 def pollster_predictions(poll_rows):
     """
     Given a list of *PollDataRow*s, returns *PollsterPredictions*.
     For a given pollster, uses only the most recent poll for a state.
     """
-    #TODO: Implement this function
-    pass
+
 
 
 ################################################################################
