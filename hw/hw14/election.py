@@ -72,7 +72,6 @@ def most_recent_poll_row(poll_rows, pollster, state):
         return most_recent
 
 
-
 ################################################################################
 # Problem 3: Pollster predictions
 ################################################################################
@@ -82,18 +81,27 @@ def unique_column_values(rows, column_name):
     Given a list of rows and the name of a column (a string),
     returns a set containing all values in that column.
     """
-    d = {}
+    s = set()
     for row in rows:
-        d.extend(row["column_name"])
-    return d
+        s.add(row[column_name])
+    return s
+
 
 def pollster_predictions(poll_rows):
     """
     Given a list of *PollDataRow*s, returns *PollsterPredictions*.
     For a given pollster, uses only the most recent poll for a state.
     """
-
-
+    d = {}
+    pollsters = unique_column_values(poll_rows, "Pollster")
+    states = unique_column_values(poll_rows, "State")
+    for pollster in pollsters:
+        d[pollster] = {}
+        for state in states:
+            recent = most_recent_poll_row(poll_rows, pollster, state)
+            if recent is not None:
+                d[pollster][state] = row_to_edge(recent)
+    return d
 
 ################################################################################
 # Problem 4: Pollster errors
