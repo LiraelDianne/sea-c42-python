@@ -231,14 +231,20 @@ def average_edge(pollster_edges, pollster_errors):
 # Problem 7: Predict the 2012 election
 ################################################################################
 
+
 def predict_state_edges(pollster_predictions, pollster_errors):
     """
     Given *PollsterPredictions* from a current election and
     *PollsterErrors* from a past election,
     returns the predicted *StateEdges* of the current election.
     """
-    #TODO: Implement this function
-    pass
+
+    state_dict = pivot_nested_dict(pollster_predictions)
+    state_edges = {}
+    for state in state_dict:
+        predict = average_edge(state_dict[state], pollster_errors)
+        state_edges[state] = predict
+    return state_edges
 
 
 ################################################################################
