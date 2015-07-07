@@ -204,8 +204,14 @@ def weighted_average(items, weights):
     """
     assert len(items) > 0
     assert len(items) == len(weights)
-    #TODO: Implement this function
-    pass
+    weight_total = 0
+    numerator = 0
+    i = 0
+    for weight in weights:
+        weight_total = weight_total + weight
+        numerator = numerator + (weight * items[i])
+        i = i + 1
+    return numerator/weight_total
 
 
 def average_edge(pollster_edges, pollster_errors):
@@ -213,9 +219,13 @@ def average_edge(pollster_edges, pollster_errors):
     Given *PollsterEdges* and *PollsterErrors*, returns the average
     of these *Edge*s weighted by their respective *PollsterErrors*.
     """
-    #TODO: Implement this function
-    pass
-
+    weights = []
+    edges = []
+    for pollster in pollster_edges:
+        weight = pollster_to_weight(pollster, pollster_errors)
+        weights.append(weight)
+        edges.append(float(pollster_edges[pollster]))
+    return weighted_average(edges, weights)
 
 ################################################################################
 # Problem 7: Predict the 2012 election
