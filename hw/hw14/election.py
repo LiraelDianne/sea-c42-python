@@ -327,4 +327,7 @@ if __name__ == "__main__":
 ### Collaboration
 ###
 
-# ... Write your answer here, as a comment (on lines starting with "#").
+# I didn't have help on this assignment.
+# It took me five or six hours to complete.
+# I can't solve an inconsistent assertion error that I'm getting in the tests
+# from the average_edge function, but it works fine on the real data.
