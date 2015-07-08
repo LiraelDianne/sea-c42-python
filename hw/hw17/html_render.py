@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Python class example.
+Name: Crystal Stelwagen
 
 """
 
