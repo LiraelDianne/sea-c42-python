@@ -49,3 +49,23 @@ class P(Element):
 
     def __init__(self, content=""):
         Element.__init__(self, content=content, tag="p")
+
+
+class Head(Element):
+
+    def __init__(self, content=""):
+        Element.__init__(self, content=content, tag="head")
+
+class OneLineTag(Element):
+
+    def __init__(self, content=""):
+        Element.__init__(self, content=content, tag="")
+
+    def render(self, file_out, ind=""):
+        file_out.write(ind + "<%s> %s </%s>\n" % (self.tag, self.content, self.tag))
+
+
+class Title(OneLineTag):
+
+    def __init__(self, content=""):
+        Element.__init__(self, content=content, tag="title")
