@@ -10,17 +10,21 @@ Name: Crystal Stellwagen
 
 
 class Element(object):
-    def __init__(self, content="", tag=""):
+    def __init__(self, content="", tag="", **kwargs):
         self.tag = tag
         self.children = [content] if content else []
         self.content = content
+        self.attributes = kwargs
 
     def append(self, new_child):
         self.children.append(new_child)
 
     def render(self, file_out, ind=""):
         indent = ind + "    "
-        file_out.write(ind + "<%s> \n" % self.tag)
+        file_out.write(ind + "<%s" % self.tag)
+        for attrib in self.attributes:
+            file_out.write(' %s="%s"' % (attrib, self.attributes[attrib]))
+        file_out.write("> \n")
         for child in self.children:
             if type(child) == str:
                 file_out.write(indent + child + "\n")
@@ -31,41 +35,45 @@ class Element(object):
 
 class Html(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, content=content, tag="html")
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="html", **kwargs)
 
-    def render(self, file_out, ind=""):
+    def render(self, file_out, ind="", **kwargs):
         file_out.write("<!DOCTYPE html> \n")
         Element.render(self, file_out, ind="")
 
 
 class Body(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, content=content, tag="body")
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="body", **kwargs)
 
 
 class P(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, content=content, tag="p")
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="p", **kwargs)
 
 
 class Head(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, content=content, tag="head")
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="head", **kwargs)
+
 
 class OneLineTag(Element):
 
-    def __init__(self, content=""):
-        Element.__init__(self, content=content, tag="")
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="", **kwargs)
 
-    def render(self, file_out, ind=""):
-        file_out.write(ind + "<%s> %s </%s>\n" % (self.tag, self.content, self.tag))
+    def render(self, file_out, ind="", **kwargs):
+        file_out.write(ind + "<%s" % self.tag)
+        for attrib in self.attributes:
+            file_out.write(' %s="%s"' % (attrib, self.attributes[attrib]))
+        file_out.write("> %s </%s>\n" % (self.content, self.tag))
 
 
 class Title(OneLineTag):
 
-    def __init__(self, content=""):
-        Element.__init__(self, content=content, tag="title")
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="title", **kwargs)
