@@ -80,8 +80,8 @@ class Title(OneLineTag):
 
 
 class SelfClosingTag(Element):
-    def __init__(self, content="", **kwargs):
-        Element.__init__(self, content=content, tag="", **kwargs)
+    def __init__(self, **kwargs):
+        Element.__init__(self, content=None, tag="", **kwargs)
 
     def render(self, file_out, ind="", **kwargs):
         file_out.write(ind + "<%s" % self.tag)
@@ -91,13 +91,13 @@ class SelfClosingTag(Element):
 
 
 class Br(SelfClosingTag):
-    def __init__(self, content="", **kwargs):
-        Element.__init__(self, content=content, tag="br", **kwargs)
+    def __init__(self, **kwargs):
+        Element.__init__(self, content=None, tag="br", **kwargs)
 
 
 class Hr(SelfClosingTag):
-    def __init__(self, content="", **kwargs):
-        Element.__init__(self, content=content, tag="hr", **kwargs)
+    def __init__(self, **kwargs):
+        Element.__init__(self, content=None, tag="hr", **kwargs)
 
 
 class A(OneLineTag):
@@ -122,3 +122,8 @@ class Li(Element):
 class H(OneLineTag):
     def __init__(self, level, content="", **kwargs):
         Element.__init__(self, content=content, tag="h"+str(level), **kwargs)
+
+
+class Meta(SelfClosingTag):
+    def __init__(self, **kwargs):
+        Element.__init__(self, content=None, tag="meta", **kwargs)
