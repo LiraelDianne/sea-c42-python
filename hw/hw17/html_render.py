@@ -70,7 +70,7 @@ class OneLineTag(Element):
         file_out.write(ind + "<%s" % self.tag)
         for attrib in self.attributes:
             file_out.write(' %s="%s"' % (attrib, self.attributes[attrib]))
-        file_out.write("> %s </%s>\n" % (self.content, self.tag))
+        file_out.write(">%s</%s>\n" % (self.content, self.tag))
 
 
 class Title(OneLineTag):
@@ -98,3 +98,10 @@ class Br(SelfClosingTag):
 class Hr(SelfClosingTag):
     def __init__(self, content="", **kwargs):
         Element.__init__(self, content=content, tag="hr", **kwargs)
+
+
+class A(OneLineTag):
+    def __init__(self, link, content):
+        self.tag = "a"
+        self.content = content
+        self.attributes = {'href': link}
