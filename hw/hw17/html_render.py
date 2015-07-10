@@ -105,3 +105,20 @@ class A(OneLineTag):
         self.tag = "a"
         self.content = content
         self.attributes = {'href': link}
+
+
+class Ul(Element):
+
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="ul", **kwargs)
+
+
+class Li(Element):
+
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="li", **kwargs)
+
+
+class H(OneLineTag):
+    def __init__(self, level, content="", **kwargs):
+        Element.__init__(self, content=content, tag="h"+str(level), **kwargs)
