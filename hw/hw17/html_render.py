@@ -77,3 +77,24 @@ class Title(OneLineTag):
 
     def __init__(self, content="", **kwargs):
         Element.__init__(self, content=content, tag="title", **kwargs)
+
+
+class SelfClosingTag(Element):
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="", **kwargs)
+
+    def render(self, file_out, ind="", **kwargs):
+        file_out.write(ind + "<%s" % self.tag)
+        for attrib in self.attributes:
+            file_out.write(' %s="%s"' % (attrib, self.attributes[attrib]))
+        file_out.write(" />\n")
+
+
+class Br(SelfClosingTag):
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="br", **kwargs)
+
+
+class Hr(SelfClosingTag):
+    def __init__(self, content="", **kwargs):
+        Element.__init__(self, content=content, tag="hr", **kwargs)
