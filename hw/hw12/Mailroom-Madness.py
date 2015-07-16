@@ -8,18 +8,15 @@ print("Welcome to Mailroom Madness")
 
 
 def menu():
+    options = {"t": thankyou, "r": report, "quit": sys.exit}
     print("Choose from the following:")
     print("T - Send a (T)hank You")
     print("R - Create a (R)eport")
     print("quit - Quit the program")
     choice = input()
     choice = choice.lower()
-    if choice == "t":
-        thankyou()
-    elif choice == "r":
-        report()
-    elif choice == 'quit':
-        sys.exit()
+    if choice in options:
+        options[choice]()
     else:
         print("Please select one of the options.")
         menu()
@@ -33,14 +30,14 @@ def thankyou():
     donor_name = choosename()
     if donor_name not in donors:
         donors[donor_name] = []
-    new_donation = float(donationAmount(donor_name))
+    new_donation = formatNum(float(donationAmount(donor_name)))
     donors[donor_name].append(new_donation)
-    thankyouMessage = ("Dear %s, \n Thank you so much for your " % donor_name +
-                       "kind donation of $%s0. We here at " % new_donation +
-                       "the Foundation for Homeless Whales greatly " +
-                       "appreciate it. Your money will go towards creating " +
-                       " new oceans on the moon for whales to live in. \n " +
-                       "Thanks again, \n Jim Grant \n Director E. H. W.")
+    thankyouMessage = ("Dear {}, \n Thank you so much for your kind donation "
+                       "of {}. We here at the Foundation for Homeless Whales "
+                       "greatly appreciate it. Your money will go towards "
+                       "creating new oceans on the moon for whales to live in."
+                       "\n Thanks again, \n Crystal Stellwagen \n Director E. "
+                       "H. W.").format(donor_name, new_donation)
     print(thankyouMessage)
     print(input("Press Enter to Continue..."))
     menu()
