@@ -1,0 +1,54 @@
+Name: ...
+CSE 140
+Homework 2
+
+For each problem that requires a written answer, write (or copy-and-paste)
+your answers in this file.  When you are done, you should have replaced all
+the ellipses (the three dots) with your answers.
+
+At the end, you will turn in this file along with your modified
+dna_analysis.py program.
+
+
+Problem 1:
+
+(No answers in this file.)
+
+Problem 2:
+
+GC-content: 0.4302926296296296
+
+Problem 3:
+
+I got an error when the program reached line 38 because it tries to define lineum using itself - which is impossible because lineum hasn't been assigned as a variable yet.  The same thing would have happened when the program reached line 43 with the seq assignment, and also with the gc-count later if I had commented that out.
+
+Problem 4:
+
+AT-content: 0.5689938518518518
+
+Problem 5:
+
+A-content: 0.2852328518518519
+T-content: 0.283761
+G-content: 0.21254714814814815
+C-content: 0.21774548148148148
+
+Problem 6:
+
+The sum of A, T, G, and C is less than the total number of nucleotides for all the files except for the short test file.  This is because there are periodically Ns in the list of nucleotides.  I should use the sum of A, T, G, and C for my denominator in order to get the correct GC content.  I was not using this value, so my CD content was wrong.
+
+Problem 7:
+
+AT/GC ratio: 1.3223416174746196
+
+Problem 8:
+
+GC Classification: moderate GC content
+
+Collaboration:
+
+Just me
+
+Reflection:
+
+I learned that checking your work as you go is not just something you do to debug your own code - you can learn things about the information you're working with that might be hidden. It was pretty cool to be able to sort through that much data and simplify it to something easily understandable.  I don't know if there's much I'd do differently or advice I'd give to future students - it seemed pretty straightforward, although I wish I'd known there were going to be so many steps to this assignment before I started. 
